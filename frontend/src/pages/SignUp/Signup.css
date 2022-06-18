@@ -1,0 +1,130 @@
+.register {
+    color: #fff;
+    margin-top: 7.5px;
+    text-align: center;
+}
+
+.wrapper {
+    position: relative;
+    display: flex;
+    margin: 0 0;
+    /* margin-bottom: 14px; */
+}
+
+.toggle-password-btn {
+    position: absolute;
+    top: 38%;
+    right: 5%;
+}
+
+.background {
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+.background .shape {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.shape:first-child {
+    background: linear-gradient(#1845ad,
+            #23a2f6);
+    left: -100px;
+    top: -50px;
+}
+
+.shape:last-child {
+    background: linear-gradient(to right,
+            #ff512f,
+            #f09819);
+    right: -100px;
+    bottom: -50px;
+}
+
+
+
+.login-signup-form {
+    height: 550px;
+    width: 500px;
+    background-color: rgba(31, 31, 31, 0.13);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    /* backdrop-filter: blur(20px); */
+    backdrop-filter: blur(23px) saturate(50%);
+    -webkit-backdrop-filter: blur(13px) saturate(169%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 50px 35px;
+}
+
+.login-signup-form * {
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+
+.login-signup-form h3 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+.inputs {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin: 20px 0px 10px 0px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.inputs::placeholder {
+    color: #e5e5e5;
+}
+
+.signup-text {
+    font-size: 15px;
+    font-weight: 300;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 17.5px;
+}
+
+.login-form {
+    height: 400px;
+    width: 400px;
+    background-color: rgba(31, 31, 31, 0.13);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    /* backdrop-filter: blur(20px); */
+    backdrop-filter: blur(23px) saturate(50%);
+    -webkit-backdrop-filter: blur(13px) saturate(169%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 50px 35px;
+}
+
+.login-form * {
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
