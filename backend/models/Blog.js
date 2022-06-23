@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const BlogSchema = new Schema({
-    // user: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User'
-    // },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     title: {
         type: String,
         required: true
