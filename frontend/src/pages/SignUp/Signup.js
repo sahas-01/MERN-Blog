@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import './Signup.css'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import Button from '../../components/Button';
+import Button from '../../components/AuthButton/Button';
 // import { Link } from '@mui/material';
 // import Alert from '@mui/material/Alert';
 
