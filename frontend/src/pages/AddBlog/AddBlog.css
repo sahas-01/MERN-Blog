@@ -1,0 +1,124 @@
+.add-blog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+}
+
+.blog-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 550px;
+    width: 60%;
+    /* background-color: rgba(31, 31, 31, 0.13); */
+    /* border-radius: 10px; */
+    /* backdrop-filter: blur(20px); */
+    /* backdrop-filter: blur(23px) saturate(50%); */
+    /* -webkit-backdrop-filter: blur(13px) saturate(169%); */
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 50px 35px;
+    margin-top: 20px;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(26, 30, 39, 0.75);
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.blog-form * {
+
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+
+}
+
+.addblog-button {
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+}
+
+.addblog-button:hover {
+    background-color: #989898;
+}
+
+.content {
+    display: block;
+    height: 200px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.07);
+    /* border-radius: 3px; */
+    padding: 5px 10px;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 15px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.content::placeholder {
+    color: rgb(165, 165, 165, 0.95);
+}
+
+
+.blog-form-heading {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.blog-form>.inputs {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin: 20px 0px 10px 0px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+
+@media (max-width: 768px) {
+    .blog-form {
+        width: 75%;
+    }
+
+    .blog-form-heading {
+        font-size: 1.5rem;
+    }
+
+    .addblog-button {
+        font-size: 1rem;
+        padding: 7.5px 10px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .blog-form {
+        width: 85%;
+        height: auto;
+    }
+
+    .inputs,
+    .content {
+        width: 110%;
+    }
+}

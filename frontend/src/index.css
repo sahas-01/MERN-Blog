@@ -7,7 +7,10 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  background: #000000;
+  background-color: #242e3f;
+  background-image:
+    radial-gradient(at 47% 33%, hsl(187.20, 28.999999999999996%, 34%) 0, transparent 59%),
+    radial-gradient(at 82% 65%, hsl(180.00, 23%, 17%) 0, transparent 55%);
 }
 
 ::-webkit-scrollbar {
@@ -17,19 +20,19 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #8f8f8f;
+  background: black;
   border-radius: 0.5rem;
   z-index: -99;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #848484;
+  background: #47a3ff;
   border-radius: 1rem;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #2f312c8d;
+  background: #061dd28d;
   visibility: visible;
 }

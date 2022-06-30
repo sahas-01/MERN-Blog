@@ -19,6 +19,7 @@ const Signup = () => {
         password: '',
         confirmPassword: ''
     })
+    const [phone, setPhone] = useState(0)
     const togglePassword = (e) => {
         e.preventDefault();
         if (passwordType === "password") {
@@ -74,49 +75,63 @@ const Signup = () => {
 
     return (
         <>
-            <div className="background">
+            <div className="background-signup">
                 <div className="shape"></div>
                 <div className="shape"></div>
             </div>
             <form className='login-signup-form' onSubmit={handleSignup}>
                 <h2 className="register">Register with Us!</h2>
-
-                <input type="text" placeholder="Username"
-                    value={signUp.name}
-                    onChange={
-                        (e) =>
-                            setSignup({ ...signUp, name: e.target.value })
-                    }
-                    id="username" className='inputs' />
-                <div className="wrapper">
+                <div className="input-wrapper">
+                    <input type="text" placeholder="Username"
+                        value={signUp.name}
+                        onChange={
+                            (e) =>
+                                setSignup({ ...signUp, name: e.target.value })
+                        }
+                        id="username" className='inputs' required />
+                </div>
+                <div className="input-wrapper">
                     <input type="email" placeholder="E-mail"
                         value={signUp.email}
                         onChange={
                             (e) =>
                                 setSignup({ ...signUp, email: e.target.value })
                         }
-                        id="email" className='inputs' />
+                        id="email" className='email-inputs'
+                        required />
+                    <input type="number" placeholder="Phone Number"
+                        value={phone}
+                        onChange={
+                            (e) =>
+                                setPhone(e.target.value)
+                        }
+                        className='phone-inputs' />
                 </div>
-                <div className="wrapper">
+                <div className="input-wrapper">
+                    <input type="text" placeholder="Instagram" className='social-inputs' />
+                    <input type="text" placeholder="Facebook" className='social-inputs' />
+                    <input type="text" placeholder="Twitter" className='social-inputs' />
+                </div>
+                <div className="input-wrapper">
                     <input type={passwordType} placeholder="Password"
                         value={signUp.password}
                         onChange={
                             (e) =>
                                 setSignup({ ...signUp, password: e.target.value })
                         }
-                        id="password" className='inputs' />
+                        id="password" className='inputs' required />
                     <i className="toggle-password-btn" onClick={togglePassword}>
                         {passwordType === "password" ? <VisibilityIcon /> : <VisibilityOffIcon />}
                     </i>
                 </div>
-                <div className="wrapper">
+                <div className="input-wrapper">
                     <input type="password"
                         value={signUp.confirmPassword}
                         onChange={
                             (e) =>
                                 setSignup({ ...signUp, confirmPassword: e.target.value })
                         }
-                        placeholder="Confirm password" id="confirm-password" className='inputs' />
+                        placeholder="Confirm password" id="confirm-password" className='inputs' required />
                     <i className="toggle-password-btn" onClick={confirmPasswordToggle}>
                         {showPassword === "password" ? <VisibilityIcon /> : <VisibilityOffIcon />}
                     </i>

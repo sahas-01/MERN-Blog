@@ -38,7 +38,7 @@ const Navbar = () => {
 
     return (
         <AppBar position="static" sx={{
-            background: '#16161d',
+            background: 'rgba(17, 25, 40, 0.75)',
             backdropFilter: 'blur(23px) saturate(50%)',
             boxShadow: ' 0 0 40px rgba(8, 7, 16, 0.6)',
             // borderRadius: '20px',
@@ -115,22 +115,71 @@ const Navbar = () => {
                         Bloggr
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
+                        <MenuItem onClick={handleOpenUserMenu}>
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="a"
+                                href="/home"
+                                sx={{
+                                    mr: 1,
+                                    display: { xs: 'none', md: 'flex' },
+                                    color: 'inherit',
+                                    textDecoration: 'none',
+                                    fontSize: '1.1rem'
+                                }}
                             >
-                                {page}
-                            </Button>
-                        ))}
+                                Home
+                            </Typography>
+                        </MenuItem>
+                        <MenuItem onClick={handleOpenUserMenu}>
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="a"
+                                href="/writeblog"
+                                sx={{
+                                    mr: 1,
+                                    display: { xs: 'none', md: 'flex' },
+                                    color: 'inherit',
+                                    textDecoration: 'none',
+                                    fontSize: '1.1rem'
+                                }}
+                            >
+                                Write blog
+                            </Typography>
+
+                        </MenuItem>
+                        <MenuItem onClick={handleOpenUserMenu}>
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="a"
+                                href="/myblogs"
+                                sx={{
+                                    mr: 1,
+                                    display: { xs: 'none', md: 'flex' },
+                                    color: 'inherit',
+                                    textDecoration: 'none',
+                                    fontSize: '1.1rem',
+                                }}
+                            >
+                                My Blogs
+                            </Typography>
+
+                        </MenuItem>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
+                            <Link style={{
+                                textDecoration: 'none',
+                                color: 'inherit',
+                            }} to="/profile">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                </IconButton>
+                            </Link>
                         </Tooltip>
                     </Box>
                 </Toolbar>

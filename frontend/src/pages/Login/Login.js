@@ -55,23 +55,23 @@ const Login = () => {
             </div>
             <form className='login-form' onSubmit={handleLogin}>
                 <h2 className="register">Login here!</h2>
-                <div className="wrapper">
+                <div className="input-wrapper">
                     <input type="email" placeholder="E-mail"
                         value={loginCreds.email}
                         onChange={
                             (e) =>
                                 setLoginCreds({ ...loginCreds, email: e.target.value })
                         }
-                        id="email" className='inputs' />
+                        id="email" className='inputs' required />
                 </div>
-                <div className="wrapper">
+                <div className="input-wrapper">
                     <input type={passwordType} placeholder="Password"
                         value={loginCreds.password}
                         onChange={
                             (e) =>
                                 setLoginCreds({ ...loginCreds, password: e.target.value })
                         }
-                        id="password" className='inputs' />
+                        id="password" className='inputs' required />
                     <i className="toggle-password-btn" onClick={togglePassword}>
                         {passwordType === "password" ? <VisibilityIcon /> : <VisibilityOffIcon />}
                     </i>

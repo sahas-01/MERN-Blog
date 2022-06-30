@@ -27,20 +27,19 @@ export default function BlogCard() {
         // }}>
         <Card sx={{
             display: 'flex',
-            width: '70%',
-            height: '200px',
+            width: '60%',
+            height: '215px',
             my: '20px',
-            background: 'rgba(31, 31, 31, 0.13)',
+            background: 'rgba(26, 30, 39, 0.75)',
             color: 'white',
-            backdropFilter: 'blur(23px) saturate(50%)',
+            backdropFilter: 'blur(16px) saturate(180%)',
             boxShadow: ' 0 0 40px rgba(8, 7, 16, 0.6)',
             borderRadius: '20px',
             border: '2px solid rgba(255, 255, 255, 0.1)',
-        }}
-            sm={12} md={6} lg={10}>
+        }}>
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <CardContent sx={{ flex: '1 0 auto' }}>
-                    <Typography component="div" variant="h4" sx={{ mb: '25px' }}>
+                    <Typography component="div" variant="h4" sx={{ mb: '25px', fontSize: '35px' }}>
                         Blog Title
                     </Typography>
                     <Typography component="p" variant="p">
@@ -49,16 +48,22 @@ export default function BlogCard() {
                             // sentence
                         }
                     </Typography>
+                    <Typography variant="subtitle1" component="div" style={{ marginTop: '5px', color: '#BEBEBE' }}>
+                        -Author Name
+                    </Typography>
                     <Button style={{
                         background: '#ffffff',
                         color: '#080710',
                         border: 'none',
                         borderRadius: '20px',
-                        padding: '5px 5px',
-                        fontSize: '12px',
+                        padding: '5px 10px',
+                        fontSize: '11.5px',
                         fontWeight: 'bold',
                         cursor: 'pointer',
-                        marginTop: '15px',
+                        marginTop: '10px',
+                        hover: {
+                            background: '#989898'
+                        }
                     }} onClick={() => {
                         console.log("clicked")
 
@@ -67,17 +72,11 @@ export default function BlogCard() {
                 </CardContent>
 
             </Box>
-            <Box sx={{ display: 'flex', float: 'right', alignItems: 'flex-end', justifyContent: 'flex-end', pl: 1, pb: 1 }}>
-                <Typography variant="body2" color="text.secondary" component="div">
-                    Date
-                </Typography>
-            </Box>
             <CardMedia
                 component="img"
-                sx={{ ml: 25, width: 500, height: 200, borderRadius: '20px' }}
+                sx={{ ml: 5, width: 350, height: 210, borderRadius: '20px' }}
                 image={Blogimg}
                 alt="blogcardimg"
-                sm={12} md={6} lg={4}
             />
         </Card >
         // </Box>

@@ -4,7 +4,7 @@
     text-align: center;
 }
 
-.wrapper {
+.input-wrapper {
     position: relative;
     display: flex;
     margin: 0 0;
@@ -17,13 +17,37 @@
     right: 5%;
 }
 
-.background {
+.background,
+.background-signup {
     width: 430px;
     height: 520px;
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
+}
+
+.background-signup .shape {
+
+    height: 250px;
+    width: 250px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.background-signup>.shape:first-child {
+    background: linear-gradient(#1845ad,
+            #23a2f6);
+    left: -200px;
+    top: -90px;
+}
+
+.background-signup>.shape:last-child {
+    background: linear-gradient(to right,
+            #ff512f,
+            #f09819);
+    right: -180px;
+    bottom: -130px;
 }
 
 .background .shape {
@@ -51,8 +75,8 @@
 
 
 .login-signup-form {
-    height: 550px;
-    width: 500px;
+    height: 620px;
+    width: 650px;
     background-color: rgba(31, 31, 31, 0.13);
     position: absolute;
     transform: translate(-50%, -50%);
@@ -81,14 +105,28 @@
     text-align: center;
 }
 
-.inputs {
+.input-wrapper>.inputs {
     display: block;
     height: 50px;
-    width: 100%;
+    width: 98%;
     background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
     padding: 0 10px;
     margin: 20px 0px 10px 0px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+
+.email-inputs,
+.phone-inputs {
+    display: block;
+    height: 50px;
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin: 20px 10px 10px 0px;
     font-size: 14px;
     font-weight: 300;
 }
@@ -105,9 +143,21 @@
     margin-top: 17.5px;
 }
 
+.social-inputs {
+    display: block;
+    height: 50px;
+    width: 33.3%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin: 20px 10px 10px 0px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
 .login-form {
     height: 400px;
-    width: 400px;
+    width: 550px;
     background-color: rgba(31, 31, 31, 0.13);
     position: absolute;
     transform: translate(-50%, -50%);
