@@ -6,8 +6,11 @@ const fetchUser = require('../middleware/fetchUser');
 //Add a new blog to the database
 router.post('/addblog', fetchUser, blogController.addBlog);
 
-//Get all blogs of a user
-router.get('/getallblogs', fetchUser, blogController.getAllBlogs);
+//Get all blogs
+router.get('/getallblogs', blogController.getAllBlogs);
+
+//Get user specific blog
+// router.get('/getblog', fetchUser, blogController.getUserBlogs);
 
 //Update a blog
 router.patch('/updateblog/:id', fetchUser, blogController.updateBlog);
@@ -15,5 +18,7 @@ router.patch('/updateblog/:id', fetchUser, blogController.updateBlog);
 //Delete a blog by its id
 router.delete('/deleteblog/:id', fetchUser, blogController.deleteBlog);
 
+//Get all blogs of a particular user
+router.get('/getallblogsofuser/:id', fetchUser, blogController.getAllBlogsOfUser);
 
 module.exports = router;

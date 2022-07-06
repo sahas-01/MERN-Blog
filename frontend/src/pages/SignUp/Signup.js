@@ -100,11 +100,11 @@ const Signup = () => {
                         id="email" className='email-inputs'
                         required />
                     <input type="number" placeholder="Phone Number"
-                        value={phone}
-                        onChange={
-                            (e) =>
-                                setPhone(e.target.value)
-                        }
+                        value={phone && Math.max(0, phone)}
+                        min="0"
+                        step="1"
+                        onChange={e =>
+                            setPhone(e.target.value ? Number(e.target.value) : e.target.value)}
                         className='phone-inputs' />
                 </div>
                 <div className="input-wrapper">

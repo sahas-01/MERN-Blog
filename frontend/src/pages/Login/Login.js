@@ -4,12 +4,14 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from '../../components/AuthButton/Button';
 // import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [loginCreds, setLoginCreds] = useState({
         email: '',
         password: ''
     })
+    const navigate = useNavigate();
     const [passwordType, setPasswordType] = useState("password");
     const togglePassword = (e) => {
         e.preventDefault();
@@ -38,7 +40,8 @@ const Login = () => {
             .then(data => {
                 if (data.success === true) {
                     localStorage.setItem('auth-token', data.token)
-                    window.location.href = '/home'
+                    localStorage.setItem('userId', data.user.id)
+                    navigate(`/home`)
                 }
                 else {
                     alert(data.message)

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+// const Blog = require('../models/Blog');
 
 const UserSchema = new Schema({
     name: {
@@ -14,7 +15,11 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    blogs: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Blog'
+    }]
 }
 );
 

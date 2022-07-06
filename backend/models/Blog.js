@@ -14,7 +14,7 @@ const BlogSchema = new Schema({
         type: String,
         required: true,
         minlength: 10,
-        maxlength: 1000
+        maxlength: 300
     },
     tags: {
         type: [String],
@@ -22,7 +22,9 @@ const BlogSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+
+
 }
 );
 

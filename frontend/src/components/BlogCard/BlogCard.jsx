@@ -12,11 +12,18 @@ import { Button } from '@mui/material';
 // import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 // import SkipNextIcon from '@mui/icons-material/SkipNext';
 
-export default function BlogCard() {
+export default function BlogCard({
+    title,
+    description,
+    userName
+}) {
+    // console.log(props.blog);
+    // console.log(props.userName);
     // const theme = useTheme();
+    console.log(title, description, userName);
     let sentence = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget consectetur sagittis, nislnisi consectetur nisi, euismod egestas nisi nisl eget consectetur sagittis."
-    console.log(typeof (sentence.split(" ").slice(0, 10)));
-    console.log(sentence.split(' ').slice(0, 10).join(' '))
+    // console.log(typeof (sentence.split(" ").slice(0, 10)));
+    // console.log(sentence.split(' ').slice(0, 10).join(' '))
     return (
         // <Box sx={{
         //     display: 'flex',
@@ -40,16 +47,19 @@ export default function BlogCard() {
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <CardContent sx={{ flex: '1 0 auto' }}>
                     <Typography component="div" variant="h4" sx={{ mb: '25px', fontSize: '35px' }}>
-                        Blog Title
+                        {
+                            title
+                        }
                     </Typography>
                     <Typography component="p" variant="p">
                         {
-                            sentence.split(' ').slice(0, 15).join(' ')
-                            // sentence
+                            description.split(' ').slice(0, 15).join(' ') + "..."
                         }
                     </Typography>
                     <Typography variant="subtitle1" component="div" style={{ marginTop: '5px', color: '#BEBEBE' }}>
-                        -Author Name
+                        {
+                            userName
+                        }
                     </Typography>
                     <Button style={{
                         background: '#ffffff',

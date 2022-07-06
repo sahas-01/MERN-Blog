@@ -15,7 +15,7 @@ const fetchUser = async (req, res, next) => {
     }
     catch (err) {
         return res.status(401).json({
-            message: 'Error Logging in',
+            message: err.message,
             success: false,
         });
     }

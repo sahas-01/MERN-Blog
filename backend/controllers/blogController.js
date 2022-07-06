@@ -1,31 +1,52 @@
 const Blog = require('../models/Blog');
+const User = require('../models/User');
 
 //Add blog controller
 const addBlog = async (req, res) => {
-    const { title, content } = req.body;
-    const tags = req.body.tags.split(','); //Split the tags into an array
-    console.log(title, content, tags);
+    const { title, content, tags, user } = req.body;
+    let existingUser;
     try {
-        const blog = await Blog.create({ title, content, tags });
-        res.status(201).json({
-            message: 'Blog created successfully',
+        existingUser = await User.findById(user);
+        if (!existingUser) {
+            return res.status(404).json({
+                message: 'User not found',
+            });
+        }
+    }
+    catch (err) {
+        return res.status(500).json({
+            message: err.message,
+        });
+    }
+    const blog = new Blog({
+        title,
+        content,
+        tags,
+        user
+    });
+    try {
+        await blog.save();
+        existingUser.blogs.push(blog);
+        await existingUser.save();
+        res.status(200).json({
+            message: 'Blog added successfully',
             success: true,
             blog
         });
     }
     catch (err) {
-        res.status(500).json({
-            message: 'Error creating blog',
-            success: false,
+        return res.status(500).json({
+            message: err.message,
         });
     }
+
 }
 
 
 //Get all blogs controller
 const getAllBlogs = async (req, res) => {
     try {
-        const blogs = await Blog.find({ user: req.user._id });
+        const blogs = await Blog.find().populate('user');
         res.status(200).json({
             message: 'Blogs retrieved successfully',
             success: true,
@@ -34,11 +55,39 @@ const getAllBlogs = async (req, res) => {
     }
     catch (err) {
         res.status(500).json({
-            message: 'Error retrieving blogs',
+            message: err.message,
             success: false,
         });
     }
 }
+
+
+//Get all blogs of a particular user
+const getAllBlogsOfUser = async (req, res) => {
+    try {
+        console.log(req.user.id);
+        const blogs = await User.findById(req.user.id).populate('blogs');
+        res.status(200).json({
+            message: 'Blogs retrieved successfully',
+            success: true,
+            user: blogs
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: err.message,
+            success: false,
+        });
+    }
+}
+
+
+
+
+
+
+
+
 
 
 //Update a blog by its id
@@ -96,4 +145,4 @@ const deleteBlog = async (req, res) => {
     }
 }
 
-module.exports = { addBlog, getAllBlogs, updateBlog, deleteBlog };
+module.exports = { addBlog, getAllBlogs, updateBlog, deleteBlog, getAllBlogsOfUser };

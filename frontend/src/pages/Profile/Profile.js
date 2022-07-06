@@ -1,10 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import './Profile.css'
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import { useNavigate } from 'react-router-dom'
 function Profile() {
+    const [user, setUser] = useState({})
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (localStorage.getItem('auth-token') === null) {
+            setTimeout(() => {
+                navigate('/login')
+            }
+                , 250)
+        }
+        // navigate('/login')
+    }
+        , [])
+
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_API_URL}/user/getuser/${localStorage.getItem('userId')}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('auth-token')
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setUser(data.user)
+            }
+                , err => {
+                    console.log(err)
+                }
+            )
+    }
+        , [])
+    console.log(user)
     return (
         <>
             <Navbar />
@@ -39,7 +74,7 @@ function Profile() {
                 <div class="wrapper">
                     <div class="left">
                         <img src="https://i.imgur.com/cMy8V5j.png" alt="user" width="100" />
-                        <h4>Name</h4>
+                        <h4>{user.name}</h4>
                         <p>Designation</p>
                     </div>
                     <div class="right">
@@ -48,7 +83,9 @@ function Profile() {
                             <div class="info_data">
                                 <div class="data">
                                     <h4>Email</h4>
-                                    <p>alex@gmail.com</p>
+                                    <p>{
+                                        user.email
+                                    }</p>
                                 </div>
                                 <div class="data">
                                     <h4>Phone</h4>

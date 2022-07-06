@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Blog = require('../models/Blog');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 //User signup controller here
@@ -18,6 +19,7 @@ const userSignUp = async (req, res) => {
             name: req.body.name,
             email: req.body.email,
             password: hashedPassword,
+            blogs: []
         });
         const payload = {
             user: {
@@ -26,7 +28,10 @@ const userSignUp = async (req, res) => {
         }
 
         console.log(payload);
-        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 });
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+            expiresIn:
+                '20d'
+        });
         res.status(200).json({
             message: 'User created successfully',
             success: true,
@@ -68,11 +73,17 @@ const userLogin = async (req, res) => {
             }
         };
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 });
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '20d' });
         res.status(200).json({
             message: 'User logged in successfully',
             success: true,
             token,
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                blogs: user.blogs
+            }
         });
     }
     catch (err) {
@@ -103,4 +114,26 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-module.exports = { userSignUp, getAllUsers, userLogin };
+//Get a user by their id
+const getUserById = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        res.status(200).json({
+            message: 'User retrieved successfully',
+            success: true,
+            user
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: 'Error retrieving user',
+            success: false,
+        });
+    }
+}
+
+
+
+
+
+module.exports = { userSignUp, getAllUsers, userLogin , getUserById };
