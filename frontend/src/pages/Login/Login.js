@@ -23,9 +23,9 @@ const Login = () => {
     }
     const handleLogin = async (e) => {
         e.preventDefault()
-        console.log('submit')
+        // console.log('submit')
         const { email, password } = loginCreds;
-        console.log(email, password)
+        // console.log(email, password)
         fetch(`${process.env.REACT_APP_API_URL}/user/login`, {
             method: 'POST',
             headers: {

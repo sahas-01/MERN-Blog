@@ -22,9 +22,9 @@ function AddBlog() {
 
     const handleBlogSubmit = async (e) => {
         e.preventDefault()
-        console.log('submit')
+        // console.log('submit')
         const { title, content, tags } = blogContent;
-        console.log(title, content, tags)
+        // console.log(title, content, tags)
         const res = await fetch(`${process.env.REACT_APP_API_URL}/blog/addblog`, {
             method: 'POST',
             headers: {

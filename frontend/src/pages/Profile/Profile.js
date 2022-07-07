@@ -37,7 +37,7 @@ function Profile() {
             .then(data => {
                 setUser(data.user)
                 const newU = data.user.blogs
-                console.log(newU)
+                // console.log(newU)
                 recentBlog = newU[newU.length - 1]
                 fetch(`${process.env.REACT_APP_API_URL}/blog/getblog/${recentBlog}`, {
                     method: 'GET',
@@ -48,22 +48,22 @@ function Profile() {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data)
+                        // console.log(data)
                         setRecent(data.blog)
                     }
                         , err => {
-                            console.log(err)
+                            // console.log(err)
                         }
                     )
 
             }
                 , err => {
-                    console.log(err)
+                    // console.log(err)
                 }
             )
     }
         , [])
-    console.log(user)
+    // console.log(user)
     return (
         <>
 

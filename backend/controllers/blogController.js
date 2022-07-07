@@ -66,7 +66,7 @@ const getAllBlogs = async (req, res) => {
 //Get all blogs of a particular user
 const getAllBlogsOfUser = async (req, res) => {
     try {
-        console.log(req.user.id);
+        // console.log(req.user.id);
         const blogs = await User.findById(req.user.id).populate('blogs');
         res.status(200).json({
             message: 'Blogs retrieved successfully',
@@ -100,7 +100,7 @@ const updateBlog = async (req, res) => {
                 message: 'Blog not found',
             });
         }
-        console.log(blog);
+        // console.log(blog);
         const { title, content } = req.body;
         const tags = req.body.tags.split(','); //Split the tags into an array
         blog.title = title;

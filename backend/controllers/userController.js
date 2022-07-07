@@ -30,7 +30,7 @@ const userSignUp = async (req, res) => {
             }
         }
 
-        console.log(payload);
+        // console.log(payload);
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
             expiresIn:
                 '20d'
@@ -47,7 +47,7 @@ const userSignUp = async (req, res) => {
             message: err.message,
             success: false,
         });
-        console.log(err);
+        // console.log(err);
     }
 }
 
@@ -97,7 +97,7 @@ const userLogin = async (req, res) => {
             message: 'Error logging in user',
             success: false,
         });
-        console.log(err);
+        // console.log(err);
     }
 }
 

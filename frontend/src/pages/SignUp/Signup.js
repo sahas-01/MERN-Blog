@@ -32,10 +32,10 @@ const Signup = () => {
         setPasswordType("password")
     }
     const confirmPasswordToggle = (e) => {
-        console.log("confirmPasswordToggle working")
+        // console.log("confirmPasswordToggle working")
         e.preventDefault();
         if (showPassword === "password") {
-            console.log(showPassword)
+            // console.log(showPassword)
             setShowPassword("text")
             return;
         }
@@ -43,12 +43,12 @@ const Signup = () => {
     }
     const handleSignup = async (e) => {
         e.preventDefault()
-        console.log('submit')
+        // console.log('submit')
         if (signUp.password !== signUp.confirmPassword) {
             alert("Passwords do not match")
         }
         const { name, email, password, instagram, twitter } = signUp;
-        console.log(name, email, password)
+        // console.log(name, email, password)
         fetch(`${process.env.REACT_APP_API_URL}/user/auth`, {
             method: 'POST',
             headers: {

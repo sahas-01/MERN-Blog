@@ -29,16 +29,16 @@ function MyBlogs() {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data.user)
+                // console.log(data.user)
                 setMyBlogs(data.user)
             }
                 , err => {
-                    console.log(err)
+                    // console.log(err)
                 }
             )
     }
         , [])
-    console.log(myBlogs)
+    // console.log(myBlogs)
 
     return (
         <>
