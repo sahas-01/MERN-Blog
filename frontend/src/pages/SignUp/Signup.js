@@ -17,7 +17,10 @@ const Signup = () => {
         name: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        phone: '',
+        instagram: '',
+        twitter: '',
     })
     const [phone, setPhone] = useState(0)
     const togglePassword = (e) => {
@@ -44,7 +47,7 @@ const Signup = () => {
         if (signUp.password !== signUp.confirmPassword) {
             alert("Passwords do not match")
         }
-        const { name, email, password } = signUp;
+        const { name, email, password, instagram, twitter } = signUp;
         console.log(name, email, password)
         fetch(`${process.env.REACT_APP_API_URL}/user/auth`, {
             method: 'POST',
@@ -54,7 +57,11 @@ const Signup = () => {
             body: JSON.stringify({
                 name,
                 email,
-                password
+                password,
+                phone,
+                instagram,
+                twitter,
+
             })
         })
             .then(res => res.json())
@@ -108,9 +115,21 @@ const Signup = () => {
                         className='phone-inputs' />
                 </div>
                 <div className="input-wrapper">
-                    <input type="text" placeholder="Instagram" className='social-inputs' />
-                    <input type="text" placeholder="Facebook" className='social-inputs' />
-                    <input type="text" placeholder="Twitter" className='social-inputs' />
+                    <input type="text" placeholder="Instagram" className='social-inputs'
+                        value={signUp.instagram}
+                        onChange={
+                            (e) =>
+                                setSignup({ ...signUp, instagram: e.target.value })
+                        }
+                    />
+                    {/* <input type="text" placeholder="Facebook" className='social-inputs' /> */}
+                    <input type="text" placeholder="Twitter" className='social-inputs'
+                        value={signUp.twitter}
+                        onChange={
+                            (e) =>
+                                setSignup({ ...signUp, twitter: e.target.value })
+                        }
+                    />
                 </div>
                 <div className="input-wrapper">
                     <input type={passwordType} placeholder="Password"

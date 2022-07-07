@@ -19,7 +19,10 @@ const userSignUp = async (req, res) => {
             name: req.body.name,
             email: req.body.email,
             password: hashedPassword,
-            blogs: []
+            blogs: [],
+            phone: req.body.phone,
+            instagram: req.body.instagram,
+            twitter: req.body.twitter,
         });
         const payload = {
             user: {
@@ -41,7 +44,7 @@ const userSignUp = async (req, res) => {
     }
     catch (err) {
         res.status(500).json({
-            message: 'Error creating user',
+            message: err.message,
             success: false,
         });
         console.log(err);
@@ -82,7 +85,10 @@ const userLogin = async (req, res) => {
                 id: user.id,
                 name: user.name,
                 email: user.email,
-                blogs: user.blogs
+                blogs: user.blogs,
+                instagram: user.instagram,
+                twitter: user.twitter,
+                facebook: user.facebook,
             }
         });
     }
@@ -136,4 +142,4 @@ const getUserById = async (req, res) => {
 
 
 
-module.exports = { userSignUp, getAllUsers, userLogin , getUserById };
+module.exports = { userSignUp, getAllUsers, userLogin, getUserById };

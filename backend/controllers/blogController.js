@@ -3,7 +3,8 @@ const User = require('../models/User');
 
 //Add blog controller
 const addBlog = async (req, res) => {
-    const { title, content, tags, user } = req.body;
+    const { title, content, user } = req.body;
+    const tags = req.body.tags.split(','); //Split the tags into an array
     let existingUser;
     try {
         existingUser = await User.findById(user);
@@ -145,4 +146,24 @@ const deleteBlog = async (req, res) => {
     }
 }
 
-module.exports = { addBlog, getAllBlogs, updateBlog, deleteBlog, getAllBlogsOfUser };
+
+//Get a blog by its id
+const getBlogById = async (req, res) => {
+    try {
+        const blog = await Blog.findById(req.params.id).populate('user');
+        res.status(200).json({
+            message: 'Blog retrieved successfully',
+            success: true,
+            blog
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: 'Error retrieving blog',
+            success: false,
+        });
+    }
+}
+
+
+module.exports = { addBlog, getAllBlogs, updateBlog, deleteBlog, getAllBlogsOfUser, getBlogById };

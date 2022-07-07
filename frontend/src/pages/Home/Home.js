@@ -65,7 +65,8 @@ const Home = () => {
 
                     blogs && !loading &&
                     blogs.map(blog => {
-                        return <BlogCard key={blog._id} title={blog.title} description={blog.content} userName={blog.user.name} />
+                        return <BlogCard key={blog._id} title={blog.title} description={blog.content} userName={blog.user.name} 
+                            tags={blog.tags} />
                     }
                     )
 

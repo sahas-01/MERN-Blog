@@ -19,7 +19,22 @@ const UserSchema = new Schema({
     blogs: [{
         type: Schema.Types.ObjectId,
         ref: 'Blog'
-    }]
+    }],
+    phone: {
+        type: Number,
+        required: true
+    },
+    instagram: {
+        type: String,
+        required: true
+    },
+    twitter: {
+        type: String,
+        required: true
+    },
+    facebook: {
+        type: String,
+    }
 }
 );
 

@@ -1,94 +1,77 @@
 import * as React from 'react';
-// import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-// import IconButton from '@mui/material/IconButton';
-import Blogimg from '../../assets/blog-image.jpg';
 import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
-// import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-// import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-// import SkipNextIcon from '@mui/icons-material/SkipNext';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function BlogCard({
     title,
     description,
-    userName
+    userName,
+    isUser,
+    tags,
 }) {
-    // console.log(props.blog);
-    // console.log(props.userName);
-    // const theme = useTheme();
-    console.log(title, description, userName);
-    let sentence = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget consectetur sagittis, nislnisi consectetur nisi, euismod egestas nisi nisl eget consectetur sagittis."
-    // console.log(typeof (sentence.split(" ").slice(0, 10)));
-    // console.log(sentence.split(' ').slice(0, 10).join(' '))
     return (
-        // <Box sx={{
-        //     display: 'flex',
-        //     flexDirection: 'column',
-        //     alignItems: 'center',
-        //     justifyContent: 'center',
-        //     my: '20px',
-        // }}>
-        <Card sx={{
-            display: 'flex',
-            width: '60%',
-            height: '215px',
-            my: '20px',
-            background: 'rgba(26, 30, 39, 0.75)',
-            color: 'white',
-            backdropFilter: 'blur(16px) saturate(180%)',
-            boxShadow: ' 0 0 40px rgba(8, 7, 16, 0.6)',
-            borderRadius: '20px',
-            border: '2px solid rgba(255, 255, 255, 0.1)',
-        }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                <CardContent sx={{ flex: '1 0 auto' }}>
-                    <Typography component="div" variant="h4" sx={{ mb: '25px', fontSize: '35px' }}>
-                        {
-                            title
-                        }
-                    </Typography>
-                    <Typography component="p" variant="p">
-                        {
-                            description.split(' ').slice(0, 15).join(' ') + "..."
-                        }
-                    </Typography>
-                    <Typography variant="subtitle1" component="div" style={{ marginTop: '5px', color: '#BEBEBE' }}>
-                        {
-                            userName
-                        }
-                    </Typography>
-                    <Button style={{
-                        background: '#ffffff',
-                        color: '#080710',
-                        border: 'none',
-                        borderRadius: '20px',
-                        padding: '5px 10px',
-                        fontSize: '11.5px',
-                        fontWeight: 'bold',
-                        cursor: 'pointer',
-                        marginTop: '10px',
-                        hover: {
-                            background: '#989898'
-                        }
-                    }} onClick={() => {
-                        console.log("clicked")
+        <>
+            <Card sx={{
+                display: 'flex',
+                width: '45%',
+                height: '215px',
+                my: '20px',
+                background: 'rgba(26, 30, 39, 0.75)',
+                color: 'white',
+                backdropFilter: 'blur(16px) saturate(180%)',
+                boxShadow: ' 0 0 40px rgba(8, 7, 16, 0.6)',
+                borderRadius: '20px',
+                border: '2px solid rgba(255, 255, 255, 0.1)',
+            }}>
+                <Box sx={{ display: 'flex' }}>
+                    <CardContent sx={{ flex: '1 0 auto' }}>
+                        <Typography component="div" variant="h4" sx={{ mb: '25px', fontSize: '35px' }}>
+                            {isUser ?
+                                <>
+                                    <EditIcon style={{ paddingTop: '5px', margin: '0px 5px', cursor: 'pointer' }} />
+                                    <DeleteIcon style={{ paddingTop: '5px', margin: '0px 10px', cursor: 'pointer' }} />
 
-                    }
-                    }>Read More</Button>
-                </CardContent>
+                                </>
+                                : null}
+                            {
+                                title
+                            }
+                        </Typography>
+                        <Typography component="p" variant="p">
+                            {
+                                description.split(' ').slice(0, 7).join(' ') + '...'
+                            }
+                        </Typography>
+                        <Typography variant="subtitle1" component="div" style={{ marginTop: '9px', color: '#BEBEBE' }}>
+                            Posted By: {
+                                userName
+                            }
+                        </Typography>
+                        <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '7.5px' }}>
+                            <Typography variant="subtitle1" component="div" style={{ marginTop: '5px', color: '#BEBEBE' }}>
+                                Tags:
+                            </Typography>
+                            {
+                                tags.map((tag, index) => {
+                                    return (
+                                        <Typography variant="p" component="p" style={{ background: 'white', color: '#000', cursor: 'pointer', marginLeft: '10px', marginTop: '7.5px', padding: '7px', borderRadius: '10px' }}>
+                                            #{
+                                                tag
+                                            }
+                                        </Typography>
+                                    )
+                                }
+                                )
+                            }
+                        </Box>
+                    </CardContent>
 
-            </Box>
-            <CardMedia
-                component="img"
-                sx={{ ml: 5, width: 350, height: 210, borderRadius: '20px' }}
-                image={Blogimg}
-                alt="blogcardimg"
-            />
-        </Card >
-        // </Box>
-    );
+                </Box>
+            </Card>
+        </>
+    )
 }

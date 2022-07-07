@@ -3,6 +3,7 @@ import BlogCard from '../../components/BlogCard/BlogCard'
 import Navbar from '../../components/Navbar/Navbar'
 import { useNavigate } from 'react-router-dom';
 
+
 function MyBlogs() {
     const userId = localStorage.getItem('userId')
     const navigate = useNavigate();
@@ -46,7 +47,11 @@ function MyBlogs() {
                 {
                     myBlogs && myBlogs.blogs &&
                     myBlogs.blogs.map(blog => {
-                        return <BlogCard key={blog._id} title={blog.title} description={blog.content} userName={myBlogs.name} />
+                        return <BlogCard key={blog._id} title={blog.title} description={blog.content} userName={myBlogs.name}
+                            isUser={myBlogs._id === localStorage.getItem('userId')}
+                            tags={blog.tags}
+                        />
+
                     }
                     )
                 }

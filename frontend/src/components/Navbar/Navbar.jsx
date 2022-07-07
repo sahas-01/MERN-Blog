@@ -36,6 +36,12 @@ const Navbar = () => {
         setAnchorElUser(null);
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('auth-token');
+        localStorage.removeItem('userId');
+        window.location.href = '/';
+    }
+
     return (
         <AppBar position="static" sx={{
             background: 'rgba(17, 25, 40, 0.75)',
@@ -168,19 +174,30 @@ const Navbar = () => {
                             </Typography>
 
                         </MenuItem>
+                        <MenuItem onClick={handleOpenUserMenu}>
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="a"
+                                href="/profile"
+                                sx={{
+                                    mr: 1,
+                                    display: { xs: 'none', md: 'flex' },
+                                    color: 'inherit',
+                                    textDecoration: 'none',
+                                    fontSize: '1.1rem',
+                                }}
+                            >
+                                Profile
+                            </Typography>
+                        </MenuItem>
+
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <Link style={{
-                                textDecoration: 'none',
-                                color: 'inherit',
-                            }} to="/profile">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                </IconButton>
-                            </Link>
-                        </Tooltip>
+                        <Button variant="contained"
+                            onClick={handleLogout}
+                        >Logout</Button>
                     </Box>
                 </Toolbar>
             </Container>

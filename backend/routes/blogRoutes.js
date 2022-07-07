@@ -21,4 +21,8 @@ router.delete('/deleteblog/:id', fetchUser, blogController.deleteBlog);
 //Get all blogs of a particular user
 router.get('/getallblogsofuser/:id', fetchUser, blogController.getAllBlogsOfUser);
 
+
+//Get a blog by its id
+router.get('/getblog/:id', fetchUser, blogController.getBlogById);
+
 module.exports = router;
