@@ -10,9 +10,11 @@ import Button from '../../components/AuthButton/Button';
 //Todo, setup custom error alerts
 //Confirm password eye icon not working properly
 const Signup = () => {
+    const [fileInputState, setFileInputState] = useState('');
+    const [previewSource, setPreviewSource] = useState('');
+    const [selectedFile, setSelectedFile] = useState();
     const [passwordType, setPasswordType] = useState("password");
     const [showPassword, setShowPassword] = useState("password");
-    // const [error, setError] = useState("");
     const [signUp, setSignup] = useState({
         name: '',
         email: '',
@@ -21,8 +23,9 @@ const Signup = () => {
         phone: '',
         instagram: '',
         twitter: '',
+        profilePicture: '',
     })
-    const [phone, setPhone] = useState(0)
+    const [phone, setPhone] = useState('')
     const togglePassword = (e) => {
         e.preventDefault();
         if (passwordType === "password") {
@@ -41,14 +44,33 @@ const Signup = () => {
         }
         setShowPassword("password")
     }
+    const handleFileInputChange = (e) => {
+        console.log("handleFileInputChange working")
+        e.preventDefault();
+        const file = e.target.files[0];
+        setSelectedFile(file);
+        setFileInputState(e.target.value);
+    }
+
+
+
     const handleSignup = async (e) => {
         e.preventDefault()
         // console.log('submit')
+        const reader = new FileReader();
+        reader.readAsDataURL(selectedFile);
+        reader.onload = () => {
+            console.log(reader.result)
+            setSignup({
+                ...signUp,
+                profilePicture: reader.result
+            })
+            console.log(signUp.profilePicture)
+        }
         if (signUp.password !== signUp.confirmPassword) {
             alert("Passwords do not match")
         }
-        const { name, email, password, instagram, twitter } = signUp;
-        // console.log(name, email, password)
+        const { name, email, password, instagram, twitter, profilePicture } = signUp;
         fetch(`${process.env.REACT_APP_API_URL}/user/auth`, {
             method: 'POST',
             headers: {
@@ -61,7 +83,7 @@ const Signup = () => {
                 phone,
                 instagram,
                 twitter,
-
+                data: profilePicture
             })
         })
             .then(res => res.json())
@@ -86,7 +108,8 @@ const Signup = () => {
                 <div className="shape"></div>
                 <div className="shape"></div>
             </div>
-            <form className='login-signup-form' onSubmit={handleSignup}>
+            <form className='login-signup-form' onSubmit={handleSignup}
+                encType="multipart/form-data">
                 <h2 className="register">Register with Us!</h2>
                 <div className="input-wrapper">
                     <input type="text" placeholder="Username"
@@ -130,6 +153,16 @@ const Signup = () => {
                                 setSignup({ ...signUp, twitter: e.target.value })
                         }
                     />
+
+                    <input type="file"
+                        accept=".png, .jpg, .jpeg"
+                        placeholder="Profile Picture"
+                        value={fileInputState}
+                        onChange={
+                            handleFileInputChange
+                        }
+                        className='profile-picture-inputs' />
+
                 </div>
                 <div className="input-wrapper">
                     <input type={passwordType} placeholder="Password"

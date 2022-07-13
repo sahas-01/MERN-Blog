@@ -4,6 +4,7 @@ const userController = require('../controllers/userController');
 const fetchUser = require('../middleware/fetchUser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const parser = require('../middleware/cloudinary.config.js');
 //User signup
 router.post('/auth', userController.userSignUp);
 

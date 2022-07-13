@@ -32,7 +32,7 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    facebook: {
+    profilePicture: {
         type: String,
     }
 }

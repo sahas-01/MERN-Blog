@@ -98,7 +98,11 @@ function Profile() {
                 </div> */}
                 <div class="wrapper">
                     <div class="left">
-                        <img src="https://i.imgur.com/cMy8V5j.png" alt="user" width="100" />
+                        <img src={
+                            user.profile_pic === null ?
+                                'https://www.w3schools.com/howto/img_avatar.png'
+                                : user.profilePicture
+                        } alt="user" width="100" />
                         <h4>{user.name}</h4>
                         <p>Designation</p>
                     </div>

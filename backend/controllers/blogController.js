@@ -83,29 +83,19 @@ const getAllBlogsOfUser = async (req, res) => {
 }
 
 
-
-
-
-
-
-
-
-
 //Update a blog by its id
 const updateBlog = async (req, res) => {
+    const { title, content, tags } = req.body;
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+        return res.status(404).json({
+            message: 'Blog not found',
+        });
+    }
+    blog.title = title;
+    blog.content = content;
+    blog.tags = tags.split(',');
     try {
-        const blog = await Blog.findById(req.params.id);
-        if (!blog) {
-            return res.status(404).json({
-                message: 'Blog not found',
-            });
-        }
-        // console.log(blog);
-        const { title, content } = req.body;
-        const tags = req.body.tags.split(','); //Split the tags into an array
-        blog.title = title;
-        blog.content = content;
-        blog.tags = tags;
         await blog.save();
         res.status(200).json({
             message: 'Blog updated successfully',
@@ -113,10 +103,9 @@ const updateBlog = async (req, res) => {
             blog
         });
     }
-
     catch (err) {
         res.status(500).json({
-            message: 'Error updating blog',
+            message: err.message,
             success: false,
         });
     }
@@ -125,13 +114,13 @@ const updateBlog = async (req, res) => {
 
 //Delete a blog by its id
 const deleteBlog = async (req, res) => {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+        return res.status(404).json({
+            message: 'Blog not found',
+        });
+    }
     try {
-        const blog = await Blog.findById(req.params.id);
-        if (!blog) {
-            return res.status(404).json({
-                message: 'Blog not found',
-            });
-        }
         await blog.remove();
         res.status(200).json({
             message: 'Blog deleted successfully',
@@ -140,11 +129,12 @@ const deleteBlog = async (req, res) => {
     }
     catch (err) {
         res.status(500).json({
-            message: 'Error deleting blog',
+            message: err.message,
             success: false,
         });
     }
 }
+
 
 
 //Get a blog by its id

@@ -2,6 +2,7 @@ const User = require('../models/User');
 const Blog = require('../models/Blog');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+
 //User signup controller here
 const userSignUp = async (req, res) => {
     // const { name, email, password } = req.body;
@@ -15,6 +16,8 @@ const userSignUp = async (req, res) => {
         }
         let salt = await bcrypt.genSalt(10);
         let hashedPassword = await bcrypt.hash(req.body.password, salt);
+        const fileStr = req.body.data;
+        console.log(fileStr);
         user = await User.create({
             name: req.body.name,
             email: req.body.email,
@@ -23,6 +26,7 @@ const userSignUp = async (req, res) => {
             phone: req.body.phone,
             instagram: req.body.instagram,
             twitter: req.body.twitter,
+            profilePicture: fileStr,
         });
         const payload = {
             user: {
