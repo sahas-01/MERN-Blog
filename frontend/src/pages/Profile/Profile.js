@@ -102,7 +102,9 @@ function Profile() {
                             user.profile_pic === null ?
                                 'https://www.w3schools.com/howto/img_avatar.png'
                                 : user.profilePicture
-                        } alt="user" width="100" />
+                        } width="100"
+                            className="profile-img" />
+
                         <h4>{user.name}</h4>
                         <p>Designation</p>
                     </div>
@@ -151,7 +153,6 @@ function Profile() {
                             <ul>
                                 <li><a href={`http://instagram.com/${user.instagram}`} target="_blank" rel='noreferrer'><InstagramIcon /></a></li>
                                 <li><a href={`http://twitter.com/${user.twitter}`} target="_blank" rel='noreferrer'><TwitterIcon /></a></li>
-                                <li><a href='http://facebook.com' target="_blank" rel='noreferrer'><FacebookIcon /></a></li>
                             </ul>
                         </div>
                     </div>

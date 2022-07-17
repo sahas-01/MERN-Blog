@@ -114,7 +114,7 @@ export default function BlogCard({
                         border: '2px solid rgba(255, 255, 255, 0.1)',
                     }}>
                     <CardContent sx={{
-                        flex: '1 0 auto',
+                        flexWrap: 'wrap',
                     }}>
                         <Typography
                             xs={12}

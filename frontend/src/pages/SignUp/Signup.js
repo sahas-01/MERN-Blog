@@ -5,16 +5,27 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from '../../components/AuthButton/Button';
 // import { Link } from '@mui/material';
-// import Alert from '@mui/material/Alert';
-
+import MuiAlert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 //Todo, setup custom error alerts
 //Confirm password eye icon not working properly
 const Signup = () => {
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+    const [snackbarStatus, setSnackbarStatus] = useState({ severity: "", open: false, message: "" })
     const [fileInputState, setFileInputState] = useState('');
-    const [previewSource, setPreviewSource] = useState('');
     const [selectedFile, setSelectedFile] = useState();
     const [passwordType, setPasswordType] = useState("password");
-    const [showPassword, setShowPassword] = useState("password");
+    const [success, setSuccess] = useState(false);
+    const [message, setMessage] = useState('');
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnackbarStatus({ severity: "", open: false, message: "" })
+    };
     const [signUp, setSignup] = useState({
         name: '',
         email: '',
@@ -34,21 +45,13 @@ const Signup = () => {
         }
         setPasswordType("password")
     }
-    const confirmPasswordToggle = (e) => {
-        // console.log("confirmPasswordToggle working")
-        e.preventDefault();
-        if (showPassword === "password") {
-            // console.log(showPassword)
-            setShowPassword("text")
-            return;
-        }
-        setShowPassword("password")
-    }
     const handleFileInputChange = (e) => {
         console.log("handleFileInputChange working")
         e.preventDefault();
-        const file = e.target.files[0];
-        setSelectedFile(file);
+        console.log(e.target.files[0])
+        setSelectedFile(e.target.files[0]);
+        console.log(selectedFile)
+        console.log(e.target.value)
         setFileInputState(e.target.value);
     }
 
@@ -61,20 +64,14 @@ const Signup = () => {
         reader.readAsDataURL(selectedFile);
         reader.onload = () => {
             console.log(reader.result)
-            setSignup({
-                ...signUp,
-                profilePicture: reader.result
-            })
+            setSignup({ ...signUp, profilePicture: reader.result })
             console.log(signUp.profilePicture)
-        }
-        if (signUp.password !== signUp.confirmPassword) {
-            alert("Passwords do not match")
         }
         const { name, email, password, instagram, twitter, profilePicture } = signUp;
         fetch(`${process.env.REACT_APP_API_URL}/user/auth`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 name,
@@ -83,27 +80,42 @@ const Signup = () => {
                 phone,
                 instagram,
                 twitter,
-                data: profilePicture
+                data: signUp.profilePicture,
             })
         })
             .then(res => res.json())
             .then(data => {
                 if (data.success !== true) {
-                    alert(data.message)
+                    setSnackbarStatus({ open: true, message: data.message, severity: "error" })
                 }
                 else {
-                    alert('Signup success,proceed to login')
+                    setSnackbarStatus({ open: true, message: data.message, severity: "success" })
                 }
             }
             )
             .catch(err => console.log(err))
 
+        setSignup({
+            name: '',
+            email: '',
+            password: '',
+            phone: '',
+            instagram: '',
+            twitter: '',
+            profilePicture: '',
+        })
 
+        setSuccess(false)
     }
 
 
     return (
         <>
+            <Snackbar open={snackbarStatus.open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                <Alert onClose={handleClose} severity={snackbarStatus.severity} sx={{ width: '100%' }}>
+                    {snackbarStatus.message}
+                </Alert>
+            </Snackbar>
             <div className="background-signup">
                 <div className="shape"></div>
                 <div className="shape"></div>
@@ -163,6 +175,7 @@ const Signup = () => {
                         }
                         className='profile-picture-inputs' />
 
+
                 </div>
                 <div className="input-wrapper">
                     <input type={passwordType} placeholder="Password"
@@ -176,21 +189,10 @@ const Signup = () => {
                         {passwordType === "password" ? <VisibilityIcon /> : <VisibilityOffIcon />}
                     </i>
                 </div>
-                <div className="input-wrapper">
-                    <input type="password"
-                        value={signUp.confirmPassword}
-                        onChange={
-                            (e) =>
-                                setSignup({ ...signUp, confirmPassword: e.target.value })
-                        }
-                        placeholder="Confirm password" id="confirm-password" className='inputs' required />
-                    <i className="toggle-password-btn" onClick={confirmPasswordToggle}>
-                        {showPassword === "password" ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                    </i>
-                </div>
                 <Button text="Sign Up" />
                 <p className='signup-text'>Already have an account? <a href='/login'>Login</a></p>
             </form>
+
         </>
     )
 }

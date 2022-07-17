@@ -5,12 +5,18 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from '../../components/AuthButton/Button';
 // import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import MuiAlert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 const Login = () => {
     const [loginCreds, setLoginCreds] = useState({
         email: '',
         password: ''
     })
+    const [snackbarStatus, setSnackbarStatus] = useState({ severity: "", open: false, message: "" })
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
     const navigate = useNavigate();
     const [passwordType, setPasswordType] = useState("password");
     const togglePassword = (e) => {
@@ -21,6 +27,13 @@ const Login = () => {
         }
         setPasswordType("password")
     }
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnackbarStatus({ severity: "", open: false, message: "" })
+    };
     const handleLogin = async (e) => {
         e.preventDefault()
         // console.log('submit')
@@ -41,10 +54,14 @@ const Login = () => {
                 if (data.success === true) {
                     localStorage.setItem('auth-token', data.token)
                     localStorage.setItem('userId', data.user.id)
-                    navigate(`/home`)
+                    setSnackbarStatus({ open: true, message: data.message, severity: "success" })
+                    setTimeout(() => {
+                        navigate('/home')
+                    }
+                        , 2000)
                 }
                 else {
-                    alert(data.message)
+                    setSnackbarStatus({ open: true, message: data.message, severity: "error" })
                 }
             }
             )
@@ -52,6 +69,11 @@ const Login = () => {
     return (
 
         <>
+            <Snackbar open={snackbarStatus.open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                <Alert onClose={handleClose} severity={snackbarStatus.severity} sx={{ width: '100%' }}>
+                    {snackbarStatus.message}
+                </Alert>
+            </Snackbar>
             <div className="background">
                 <div className="shape"></div>
                 <div className="shape"></div>

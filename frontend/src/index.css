@@ -14,14 +14,14 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 0.7rem;
   background: #121212;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
   background: black;
-  border-radius: 0.5rem;
+  border-radius: 0.6rem;
   z-index: -99;
 }
 
@@ -29,10 +29,4 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #47a3ff;
   border-radius: 1rem;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #061dd28d;
-  visibility: visible;
 }

@@ -3,15 +3,28 @@ import React, { useState, useEffect } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import './AddBlog.css'
 import { useNavigate } from 'react-router-dom'
+import MuiAlert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 function AddBlog() {
     const navigate = useNavigate();
+    const [snackbarStatus, setSnackbarStatus] = useState({ severity: "", open: false, message: "" })
     const [blogContent, setBlogContent] = useState({
         title: '',
         content: '',
         tags: ''
     })
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
     const user = localStorage.getItem('userId')
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnackbarStatus({ severity: "", open: false, message: "" })
+    };
     // console.log(userId)
     useEffect(() => {
         if (localStorage.getItem('auth-token') === null) {
@@ -40,10 +53,20 @@ function AddBlog() {
         })
         const data = await res.json()
         if (data.success === true) {
-            alert(data.message)
+            setSnackbarStatus({ open: true, message: data.message, severity: "success" })
+            setTimeout(() => {
+                navigate('/home')
+                setBlogContent({
+                    title: '',
+                    content: '',
+                    tags: ''
+                })
+            }
+                , 2000)
         }
         else {
-            alert(data.message)
+            setSnackbarStatus({ open: true, message: data.message, severity: "error" })
+
         }
     }
 
@@ -52,7 +75,11 @@ function AddBlog() {
         <>
             <Navbar />
             <div className="add-blog-container">
-
+                <Snackbar open={snackbarStatus.open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                    <Alert onClose={handleClose} severity={snackbarStatus.severity} sx={{ width: '100%' }}>
+                        {snackbarStatus.message}
+                    </Alert>
+                </Snackbar>
                 <form className="blog-form" onSubmit={handleBlogSubmit}>
                     <h1 className='blog-form-heading'>Put your thoughts here!</h1>
                     <input

@@ -152,7 +152,7 @@
 .social-inputs {
     display: block;
     height: 50px;
-    width: 50%;
+    width: 33.33%;
     background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
     padding: 0 10px;
@@ -185,6 +185,129 @@
     border: none;
 }
 
-.profile-picture-inputs{
-    margin-top: 30px;
+.profile-picture-inputs {
+    width: 33%;
+    margin-top: 20px;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #0070cb;
+    border: none;
+    color: white;
+    padding: 12px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 1rem;
+    border-radius: 12.5px;
+    transition: all 1s;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #002396;
+    
+}
+
+@media screen and (max-width:768px) {
+    .login-form {
+        height: 400px;
+        width: 100%;
+        background-color: rgba(26, 30, 39, 0.75);
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 60%;
+        border-radius: 10px;
+        /* backdrop-filter: blur(20px); */
+        backdrop-filter: blur(50px) saturate(200%);
+        -webkit-backdrop-filter: blur(13px) saturate(169%);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        padding: 50px 35px;
+    }
+
+    .login-signup-form {
+        width: 100%;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+    }
+
+    .background,
+    .background-signup {
+        width: 300px;
+        height: 500px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+    }
+
+    .background-signup .shape {
+
+        height: 250px;
+        width: 250px;
+        position: absolute;
+        border-radius: 50%;
+    }
+
+    .background-signup>.shape:first-child {
+        background: linear-gradient(#1845ad,
+                #23a2f6);
+        left: -200px;
+        top: -90px;
+    }
+
+    .background-signup>.shape:last-child {
+        background: linear-gradient(to right,
+                #ff512f,
+                #f09819);
+        right: -150px;
+        bottom: -280px;
+    }
+
+    .background .shape {
+        height: 200px;
+        width: 200px;
+        position: absolute;
+        border-radius: 50%;
+    }
+
+    .shape:first-child {
+        background: linear-gradient(#1845ad,
+                #23a2f6);
+        left: -100px;
+        top: -50px;
+    }
+
+    .shape:last-child {
+        background: linear-gradient(to right,
+                #ff512f,
+                #f09819);
+        right: -100px;
+        bottom: -50px;
+    }
+
+}
+
+
+@media screen and (max-width: 600px) {
+    .login-signup-form {
+        width: 130%;
+        top: 70%;
+        left: 75%;
+        transform: translate(-50%, -50%);
+
+    }
+
+    .background-signup>.shape:last-child {
+        background: linear-gradient(to right,
+                #ff512f,
+                #f09819);
+        right: -300px;
+        bottom: -280px;
+    }
 }
