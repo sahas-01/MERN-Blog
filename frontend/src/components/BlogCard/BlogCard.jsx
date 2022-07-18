@@ -6,7 +6,10 @@ import Typography from '@mui/material/Typography';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Container } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import MuiAlert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import { useState } from 'react';
 
 export default function BlogCard({
     title,
@@ -14,12 +17,61 @@ export default function BlogCard({
     userName,
     isUser,
     tags,
+    blogId,
 }) {
+    const navigate = useNavigate();
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnackbarStatus({ severity: "", open: false, message: "" })
+    };
+    const handleEdit = () => {
+        console.log(blogId);
+        navigate(`/myblog/${blogId}`);
+    }
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+    const [snackbarStatus, setSnackbarStatus] = useState({ severity: "", open: false, message: "" });
+    const handleDelete = () => {
+        console.log(blogId);
+        fetch(`${process.env.REACT_APP_API_URL}/blog/deleteblog/${blogId}`, {
+            method: 'DELETE',
+            headers: {
+                'auth-token': localStorage.getItem('auth-token'),
+            },
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                setTimeout(() => {
+                    navigate('/home');
+                }
+                    , 2000);
+                setSnackbarStatus({ severity: "success", open: true, message: "Blog deleted successfully" });
+            }
+            )
+            .catch(err => {
+                setSnackbarStatus({ severity: "error", open: true, message: "Error deleting blog" });
+                console.log(err)
+            });
+    }
+
+
+
+
     const matches = useMediaQuery('(min-width:750px)');
     return (
         matches ? (
 
             <>
+                <Snackbar open={snackbarStatus.open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                    <Alert onClose={handleClose} severity={snackbarStatus.severity} sx={{ width: '100%' }}>
+                        {snackbarStatus.message}
+                    </Alert>
+                </Snackbar>
                 <Card sx={{
                     width: '55%',
                     height: '215px',
@@ -38,8 +90,18 @@ export default function BlogCard({
                             component="div" variant="h4" sx={{ mb: '25px', fontSize: '35px' }}>
                             {isUser ?
                                 <>
-                                    <EditIcon style={{ paddingTop: '5px', margin: '0px 5px', cursor: 'pointer' }} />
-                                    <DeleteIcon style={{ paddingTop: '5px', margin: '0px 10px', cursor: 'pointer' }} />
+                                    <EditIcon style={{ paddingTop: '5px', margin: '0px 5px', cursor: 'pointer' }}
+                                        onClick={() => {
+                                            handleEdit();
+                                        }
+                                        }
+                                    />
+                                    <DeleteIcon style={{ paddingTop: '5px', margin: '0px 10px', cursor: 'pointer' }}
+                                        onClick={() => {
+                                            handleDelete();
+                                        }
+                                        }
+                                    />
 
                                 </>
                                 : null}
@@ -121,8 +183,18 @@ export default function BlogCard({
                             component="div" variant="h4" sx={{ mb: '25px', fontSize: '35px' }}>
                             {isUser ?
                                 <>
-                                    <EditIcon style={{ paddingTop: '5px', margin: '0px 5px', cursor: 'pointer' }} />
-                                    <DeleteIcon style={{ paddingTop: '5px', margin: '0px 10px', cursor: 'pointer' }} />
+                                    <EditIcon style={{ paddingTop: '5px', margin: '0px 5px', cursor: 'pointer' }}
+                                        onClick={() => {
+                                            handleEdit();
+                                        }
+                                        }
+                                    />
+                                    <DeleteIcon style={{ paddingTop: '5px', margin: '0px 10px', cursor: 'pointer' }}
+                                        onClick={() => {
+                                            handleDelete();
+                                        }
+                                        }
+                                    />
                                 </>
                                 : null}
                             {
@@ -179,6 +251,5 @@ export default function BlogCard({
         )
     )
 
-
-
 }
+

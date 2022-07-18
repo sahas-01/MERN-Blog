@@ -114,25 +114,21 @@ const updateBlog = async (req, res) => {
 
 //Delete a blog by its id
 const deleteBlog = async (req, res) => {
-    const blog = await Blog.findById(req.params.id);
-    if (!blog) {
-        return res.status(404).json({
-            message: 'Blog not found',
-        });
-    }
+    const id = req.params.id;
+
+    let blog;
     try {
-        await blog.remove();
-        res.status(200).json({
-            message: 'Blog deleted successfully',
-            success: true,
-        });
+        blog = await Blog.findByIdAndRemove(id).populate("user");
+        await blog.user.blogs.pull(blog);
+        await blog.user.save();
+    } catch (err) {
+        console.log(err);
     }
-    catch (err) {
-        res.status(500).json({
-            message: err.message,
-            success: false,
-        });
+    if (!blog) {
+        return res.status(500).json({ message: "Unable To Delete" });
     }
+    return res.status(200).json({ message: "Successfully Deleted" });
+
 }
 
 

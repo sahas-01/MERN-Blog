@@ -13,9 +13,8 @@ const Signup = () => {
     const Alert = React.forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
+    const [baseImage, setBaseImage] = useState("");
     const [snackbarStatus, setSnackbarStatus] = useState({ severity: "", open: false, message: "" })
-    const [fileInputState, setFileInputState] = useState('');
-    const [selectedFile, setSelectedFile] = useState();
     const [passwordType, setPasswordType] = useState("password");
     const [success, setSuccess] = useState(false);
     const [message, setMessage] = useState('');
@@ -45,14 +44,10 @@ const Signup = () => {
         }
         setPasswordType("password")
     }
-    const handleFileInputChange = (e) => {
-        console.log("handleFileInputChange working")
-        e.preventDefault();
+    const onChange = (e) => {
         console.log(e.target.files[0])
-        setSelectedFile(e.target.files[0]);
-        console.log(selectedFile)
-        console.log(e.target.value)
-        setFileInputState(e.target.value);
+        setBaseImage(e.target.files[0])
+        console.log(baseImage)
     }
 
 
@@ -60,13 +55,6 @@ const Signup = () => {
     const handleSignup = async (e) => {
         e.preventDefault()
         // console.log('submit')
-        const reader = new FileReader();
-        reader.readAsDataURL(selectedFile);
-        reader.onload = () => {
-            console.log(reader.result)
-            setSignup({ ...signUp, profilePicture: reader.result })
-            console.log(signUp.profilePicture)
-        }
         const { name, email, password, instagram, twitter, profilePicture } = signUp;
         fetch(`${process.env.REACT_APP_API_URL}/user/auth`, {
             method: 'POST',
@@ -121,7 +109,7 @@ const Signup = () => {
                 <div className="shape"></div>
             </div>
             <form className='login-signup-form' onSubmit={handleSignup}
-                encType="multipart/form-data">
+            >
                 <h2 className="register">Register with Us!</h2>
                 <div className="input-wrapper">
                     <input type="text" placeholder="Username"
@@ -169,10 +157,7 @@ const Signup = () => {
                     <input type="file"
                         accept=".png, .jpg, .jpeg"
                         placeholder="Profile Picture"
-                        value={fileInputState}
-                        onChange={
-                            handleFileInputChange
-                        }
+                        onChange={onChange}
                         className='profile-picture-inputs' />
 
 

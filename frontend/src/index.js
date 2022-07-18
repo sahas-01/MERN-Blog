@@ -20,6 +20,7 @@ root.render(
         <Route path="/writeblog" element={<AddBlog />} />
         <Route path="/myblogs" element={<MyBlogs />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/myblog/:id" element={<AddBlog />} />
       </Routes>
     </Router>
   </React.StrictMode>

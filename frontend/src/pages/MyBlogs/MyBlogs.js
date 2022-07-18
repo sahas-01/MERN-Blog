@@ -50,6 +50,7 @@ function MyBlogs() {
                         return <BlogCard key={blog._id} title={blog.title} description={blog.content} userName={myBlogs.name}
                             isUser={myBlogs._id === localStorage.getItem('userId')}
                             tags={blog.tags}
+                            blogId={blog._id}
                         />
 
                     }
