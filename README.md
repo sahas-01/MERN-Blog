@@ -18,5 +18,5 @@ A Full Stack Blog Application built using MongodB, ExpressJS, ReactJS and NodeJS
 
 #### Todo
 
-- Deployment of backend using Heroku
+- Deployment of backend using Heroku(current deployment fails) 
 - Handle image uploads (user's profile picture)
